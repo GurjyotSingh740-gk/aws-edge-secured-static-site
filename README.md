@@ -78,8 +78,3 @@ def lambda_handler(event, context):
     except Exception as e:
         logger.error(f"Error processing security headers: {str(e)}")
         return response
-```
-## 💻 CloudFront Setup inside LambdaEdge
-<p align="center">
-  <img src="assets/"Lambda Cloudfront setting".png" alt="AWS Lambda Source Code View" width="850">
-</p>

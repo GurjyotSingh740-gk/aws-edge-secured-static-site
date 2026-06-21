@@ -22,12 +22,24 @@ A highly available, fault-tolerant, and globally accelerated static web infrastr
 * **Edge Delivery Pipeline:** Amazon CloudFront CDN (Configured with global edge location profiles and mandatory HTTP-to-HTTPS transport protocol redirections).
 * **Serverless Compute Security:** AWS Lambda@Edge running an asynchronous Python 3.x runtime intercept handler.
 
-### Active Edge Event Triggers
+### 1. CloudFront Edge Behavior Routing Configuration
+To guarantee that traffic upgrades cleanly and routes directly to our S3-backed static platform web origin, the default behavior mapping (`*`) enforces strict transport delivery parameters.
 <p align="center">
-  <img src="assets/lambda-edge-trigger.png" alt="AWS Lambda@Edge Event Mapping" width="750">
+  <img src="assets/CloudFront Behavior 1.png" alt="CloudFront Edge Behavior Settings Routing View" width="850">
 </p>
 
-The serverless lambda routine is tied directly to CloudFront's **Origin Response** / **Viewer Response** boundary loop. This ensures that custom security headers are evaluated at the nearest geographical edge location to the end-user, minimizing performance overhead while establishing robust protection boundaries.
+### 2. Active Edge Event Triggers
+<p align="center">
+  <img src="assets/lambda-edge-trigger.png" alt="AWS Lambda@Edge Event Mapping Overview" width="750">
+</p>
+
+The serverless lambda routine is tied directly to CloudFront's distributed cache footprint. This ensures that custom security headers are evaluated at the nearest geographical edge location to the end-user, minimizing performance overhead while establishing robust protection boundaries.
+
+### 3. Deploying Triggers to the Global Network Edge
+The integration leverages a dedicated serverless deployment hook. When pushed to the CDN, it creates synchronized immutable execution replicas across all international edge environments.
+<p align="center">
+  <img src="assets/Lambda Cloudfront setting .png" alt="Deploy to Lambda Edge Configuration Modal" width="850">
+</p>
 
 ---
 
@@ -46,7 +58,7 @@ To protect the application frontend from standard web vulnerabilities, the Pytho
 
 ## 💻 Configuration & Code Repositories
 
-### 1. Core Serverless Interceptor Core (`lambda_function.py`)
+### 1. Core Serverless Interceptor (`lambda_function.py`)
 <p align="center">
   <img src="assets/lambda-code-source.png" alt="AWS Lambda Source Code View" width="850">
 </p>

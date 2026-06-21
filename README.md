@@ -5,13 +5,11 @@ A highly available, fault-tolerant, and globally accelerated static web infrastr
 ## 🏗️ Architecture Design & Visual Walkthrough
 
 ### 1. System Topology Map
-<!-- Embed your Eraser.io or visual workflow diagram here -->
 <p align="center">
   <img src="assets/system-architecture.png" alt="System Architecture Diagram" width="850">
 </p>
 
 ### 2. Live Edge Verification & Response Inspection
-<!-- Embed your Incognito F12 Developer Tools Verification Screenshot here -->
 <p align="center">
   <img src="assets/deployment-verification.png" alt="Browser F12 Network Headers Verification" width="850">
 </p>
@@ -20,13 +18,13 @@ A highly available, fault-tolerant, and globally accelerated static web infrastr
 
 ## 🛠️ Infrastructure Breakdown
 
-*   **Asset Storage Origin:** Amazon S3 (Configured for static hosting with optimized access routing).
-*   **Edge Delivery Pipeline:** Amazon CloudFront CDN (Configured with global edge location profiles and mandatory HTTP-to-HTTPS transport protocol redirections).
-*   **Serverless Compute Security:** AWS Lambda@Edge running an asynchronous Python 3.x runtime intercept handler.
+* **Asset Storage Origin:** Amazon S3 (Configured for static hosting with optimized access routing).
+* **Edge Delivery Pipeline:** Amazon CloudFront CDN (Configured with global edge location profiles and mandatory HTTP-to-HTTPS transport protocol redirections).
+* **Serverless Compute Security:** AWS Lambda@Edge running an asynchronous Python 3.x runtime intercept handler.
 
 ### Active Edge Event Triggers
 <p align="center">
-  <img src="assets/lambda-edge-trigger.png" alt="AWS Lambda@Edge Event Mapping" width="700">
+  <img src="assets/lambda-edge-trigger.png" alt="AWS Lambda@Edge Event Mapping" width="750">
 </p>
 
 The serverless lambda routine is tied directly to CloudFront's **Origin Response** / **Viewer Response** boundary loop. This ensures that custom security headers are evaluated at the nearest geographical edge location to the end-user, minimizing performance overhead while establishing robust protection boundaries.
@@ -46,9 +44,13 @@ To protect the application frontend from standard web vulnerabilities, the Pytho
 
 ---
 
-## 💻 Code Repositories
+## 💻 Configuration & Code Repositories
 
-### Core Serverless Interceptor (`lambda_function.py`)
+### 1. Core Serverless Interceptor Core (`lambda_function.py`)
+<p align="center">
+  <img src="assets/lambda-code-source.png" alt="AWS Lambda Source Code View" width="850">
+</p>
+
 ```python
 import logging
 
